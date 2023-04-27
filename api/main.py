@@ -23,7 +23,7 @@ async def predict(
     file: UploadFile = File(...)
 ):
     image = read_file_as_image(await file.read())
-    image_batch = np.expand_dims(image, axis=0)
+    image_batch = np.expand_dims(image, axis=0) # bcz model takes input as batch
     predictions = MODEL.predict(image_batch)
     predicted_class = CLASS_NAMES[np.argmax(predictions[0])]
     confidence = np.max(predictions[0])
